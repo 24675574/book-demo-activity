@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">  
+<generatorConfiguration>   
+    <context id="DB2Tables"  defaultModelType="flat"  targetRuntime="MyBatis3"> 
+    	<plugin type="org.duoku.groom.mybatis.plugin.PaginationPlugin" />
+    	<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+        <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+            <property name="searchString" value="Example$" />
+            <property name="replaceString" value="Criteria" />
+        </plugin>
+        <!-- 字段备注 -->
+        <commentGenerator>  
+            <property name="suppressDate" value="true"/>  
+            <property name="suppressAllComments" value="true"/>  
+        </commentGenerator>  
+		<!-- 数据库链接URL、用户名、密码 -->
+        <jdbcConnection 
+        	driverClass="com.mysql.jdbc.Driver" 
+        	connectionURL="jdbc:mysql://localhost:3306/book-demo-activity"
+        	userId="root" 
+        	password="root">  
+        </jdbcConnection>  
+        <javaTypeResolver>  
+            <property name="forceBigDecimals" value="false"/>  
+        </javaTypeResolver>  
+
+		<!-- model(entity)文件路径 -->
+        <javaModelGenerator targetPackage="com.lianggzone.activity.entity" targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true"/>  
+            <property name="trimStrings" value="true"/>  
+        </javaModelGenerator>
+        <!-- mapper.xml文件路径 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject=".\src\main\resources">  
+            <property name="enableSubPackages" value="true"/>  
+        </sqlMapGenerator>  
+        <!-- mapper文件路径 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lianggzone.activity.dao" targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true"/> 
+        </javaClientGenerator>
+        <!-- 由数据库生成Mapper、XML、Entity需要修改的地方：
+                    schema：数据库名称
+                    tableName：数据库中表名称
+             		domainObjectName：实体类名称
+        -->
+        <!-- 
+        <table tableName="sys_role" domainObjectName="SysRole" />
+        <table tableName="sys_user_role" domainObjectName="SysUserRole" />
+        <table tableName="sys_user" domainObjectName="SysUser" />
+        -->
+        <table tableName="activity_apply" domainObjectName="ActivityApply" />
+    </context>  
+</generatorConfiguration>  
